@@ -8,7 +8,6 @@ import (
 	"github.com/docker/cli/cli-plugins/manager"
 	"github.com/docker/cli/cli-plugins/plugin"
 	"github.com/docker/cli/cli/command"
-	cliflags "github.com/docker/cli/cli/flags"
 	"github.com/docker/docker/api/types"
 	"github.com/spf13/cobra"
 )
@@ -22,20 +21,12 @@ func snap(containers []types.Container) []types.Container {
 	return sample
 }
 
-func run() {
-	dockerCli, err := command.NewDockerCli()
-	if err != nil {
-		panic("I know what it's like to lose.")
-	}
-	err = dockerCli.Initialize(cliflags.NewClientOptions())
-	if err != nil {
-		panic("I know what it's like to lose.")
-	}
+func run(dockerCli command.Cli) {
 	cli := dockerCli.Client()
 
 	containers, err := cli.ContainerList(context.Background(), types.ContainerListOptions{})
 	if err != nil {
-		panic("I know what it's like to lose.")
+		panic("You should have gone for the head.")
 	}
 
 	s := snap(containers)
@@ -55,8 +46,14 @@ func main() {
 			Short: "",
 			Long:  "",
 			Use:   "thanos",
+			PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
+				if err := plugin.PersistentPreRunE(cmd, args); err != nil {
+					return err
+				}
+				return nil
+			},
 			Run: func(cmd *cobra.Command, args []string) {
-				run()
+				run(dockerCli)
 			},
 		}
 		return cmd
