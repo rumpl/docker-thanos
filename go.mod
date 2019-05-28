@@ -1,0 +1,76 @@
+module github.com/rumpl/docker-thanos
+
+go 1.12
+
+require (
+	github.com/Azure/go-ansiterm v0.0.0-20170929234023-d6e3b3328b78
+	github.com/Microsoft/go-winio v0.0.0-20190321200717-c599b533b43b
+	github.com/Microsoft/hcsshim v0.0.0-20190417211021-672e52e9209d
+	github.com/agl/ed25519 v0.0.0-20150830182803-278e1ec8e8a6
+	github.com/beorn7/perks v1.0.0
+	github.com/containerd/containerd v0.0.0-20190321141026-ceba56893a76
+	github.com/containerd/continuity v0.0.0-20181203112020-004b46473808
+	github.com/containerd/fifo v0.0.0-20180307165137-3d5202aec260
+	github.com/containerd/typeurl v0.0.0-20180627222232-a93fcdb778cd
+	github.com/davecgh/go-spew v1.1.1
+	github.com/docker/cli v0.0.0-20190424194312-f28d9cc92972
+	github.com/docker/compose-on-kubernetes v0.4.21
+	github.com/docker/distribution v0.0.0-20190205005809-0d3efadf0154
+	github.com/docker/docker v0.0.0-20190424100123-ac48309ac402
+	github.com/docker/docker-credential-helpers v0.6.1
+	github.com/docker/go v0.0.0-20160303222718-d30aec9fd63c
+	github.com/docker/go-connections v0.4.0
+	github.com/docker/go-events v0.0.0-20170721190031-9461782956ad
+	github.com/docker/go-metrics v0.0.0-20180209012529-399ea8c73916
+	github.com/docker/go-units v0.4.0
+	github.com/gogo/googleapis v1.0.0
+	github.com/gogo/protobuf v1.2.0
+	github.com/golang/protobuf v1.3.1
+	github.com/google/gofuzz v0.0.0-20170612174753-24818f796faf
+	github.com/googleapis/gnostic v0.0.0-20170729233727-0c5108395e2d
+	github.com/gorilla/context v1.1.1
+	github.com/gorilla/mux v0.0.0-20170228224354-599cba5e7b61
+	github.com/hashicorp/go-version v0.0.0-20180322230233-23480c066577
+	github.com/imdario/mergo v0.3.5
+	github.com/inconshreveable/mousetrap v1.0.0
+	github.com/json-iterator/go v0.0.0-20180701071628-ab8a2e0c74be
+	github.com/konsorten/go-windows-terminal-sequences v1.0.2
+	github.com/matttproud/golang_protobuf_extensions v1.0.1
+	github.com/miekg/pkcs11 v0.0.0-20180208123018-5f6e0d0dad6f
+	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd
+	github.com/modern-go/reflect2 v1.0.1
+	github.com/morikuni/aec v0.0.0-20170113033406-39771216ff4c
+	github.com/opencontainers/go-digest v1.0.0-rc1
+	github.com/opencontainers/image-spec v1.0.1
+	github.com/opencontainers/runc v0.0.0-20190403200919-029124da7af7
+	github.com/opencontainers/runtime-spec v0.0.0-20190207185410-29686dbc5559
+	github.com/pkg/errors v0.8.1
+	github.com/prometheus/client_golang v0.9.2
+	github.com/prometheus/client_model v0.0.0-20190129233127-fd36f4220a90
+	github.com/prometheus/common v0.3.0
+	github.com/prometheus/procfs v0.0.0-20190425082905-87a4384529e0
+	github.com/sirupsen/logrus v1.4.1
+	github.com/spf13/cobra v0.0.3
+	github.com/spf13/pflag v1.0.3
+	github.com/syndtr/gocapability v0.0.0-20170704070218-db04d3cc01c8
+	github.com/theupdateframework/notary v0.6.1
+	golang.org/x/crypto v0.0.0-20180904163835-0709b304e793
+	golang.org/x/net v0.0.0-20190213061140-3a22650c66bd
+	golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be
+	golang.org/x/sync v0.0.0-20190227155943-e225da77a7e6
+	golang.org/x/sys v0.0.0-20190428183149-804c0c7841b5
+	golang.org/x/text v0.3.2
+	golang.org/x/time v0.0.0-20161028155119-f51c12702a4d
+	google.golang.org/appengine v1.5.0
+	google.golang.org/genproto v0.0.0-20190425155659-357c62f0e4bb
+	google.golang.org/grpc v1.19.0
+	gopkg.in/inf.v0 v0.9.0
+	gopkg.in/yaml.v2 v2.2.2
+	k8s.io/api v0.0.0-20190313235455-40a48860b5ab
+	k8s.io/apimachinery v0.0.0-20190313205120-d7deff9243b1
+	k8s.io/client-go v11.0.0+incompatible
+	k8s.io/klog v0.0.0-20190306015804-8e90cee79f82
+	k8s.io/utils v0.0.0-20190221042446-c2654d5206da
+	sigs.k8s.io/yaml v1.1.0
+	vbom.ml/util v0.0.0-20170409195630-256737ac55c4
+)
