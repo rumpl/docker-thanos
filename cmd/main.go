@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	"math/rand"
-	"sync"
 	"time"
 
 	"github.com/docker/cli/cli-plugins/manager"
@@ -13,6 +12,7 @@ import (
 	"github.com/docker/docker/api/types"
 	"github.com/spf13/cobra"
 	"github.com/vbauerster/mpb/v4"
+	"golang.org/x/sync/errgroup"
 )
 
 var (
@@ -47,12 +47,6 @@ func snap(containers []types.Container) []types.Container {
 	return sample
 }
 
-func kill(wg *sync.WaitGroup, dockerCli command.Cli, ID string, errCh chan error) {
-	defer wg.Done()
-	err := dockerCli.Client().ContainerKill(context.Background(), ID, "9")
-	errCh <- err
-}
-
 func run(dockerCli command.Cli) error {
 	cli := dockerCli.Client()
 
@@ -68,39 +62,32 @@ func run(dockerCli command.Cli) error {
 	if len(s) == 0 {
 		return nil
 	}
-	var wg sync.WaitGroup
+	eg, _ := errgroup.WithContext(context.TODO())
+
 	p := mpb.New(mpb.WithWidth(len(s) * 2))
 	bar := p.AddBar(int64(len(s)*2),
 		mpb.BarStyle("[💀💀🐳]<+"),
 	)
-	errCh := make(chan error)
 	for _, container := range s {
-		wg.Add(1)
-		go kill(&wg, dockerCli, container.ID, errCh)
-	}
-	hasError := false
-	n := 0
-	go func() {
-		for v := range errCh {
+		container := container
+		eg.Go(func() error {
+			err := dockerCli.Client().ContainerKill(context.Background(), container.ID, "9")
 			bar.Increment(1)
-			n += 1
-			if v != nil {
-				hasError = true
-			}
-		}
-	}()
+			return err
+		})
+	}
 
-	wg.Wait()
-	close(errCh)
-	// Wait a little bit so that the progess bar has the time to render everything
+	err = eg.Wait()
+	if err != nil {
+		return ThanosError{}
+	}
+
 	time.Sleep(100 * time.Millisecond)
 	bar.Abort(false)
 	p.Wait()
 
-	if hasError {
-		return ThanosError{}
-	}
-	fmt.Println(messages[rand.Intn(len(messages))])
+	fmt.Fprintln(dockerCli.Out(), messages[rand.Intn(len(messages))])
+
 	return nil
 }
 

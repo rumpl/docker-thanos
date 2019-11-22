@@ -57,6 +57,7 @@ require (
 	github.com/theupdateframework/notary v0.6.1 // indirect
 	github.com/vbauerster/mpb/v4 v4.11.1
 	github.com/xlab/handysort v0.0.0-20150421192137-fb3537ed64a1 // indirect
+	golang.org/x/sync v0.0.0-20190227155943-e225da77a7e6
 	google.golang.org/appengine v1.5.0 // indirect
 	google.golang.org/genproto v0.0.0-20190425155659-357c62f0e4bb // indirect
 	gopkg.in/dancannon/gorethink.v3 v3.0.5 // indirect
