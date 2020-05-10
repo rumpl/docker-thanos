@@ -4,7 +4,7 @@ GO_BUILD=$(STATIC_FLAGS) go build -ldflags=$(LDFLAGS)
 OUTPUT=thanos
 
 cmd:
-	$(GO_BUILD) -o $(OUTPUT) cmd/main.go
+	$(GO_BUILD) -o $(OUTPUT) ./cmd
 
 .PHONY: cmd
 .DEFAULT: cmd
