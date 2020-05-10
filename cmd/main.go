@@ -49,7 +49,9 @@ func run(ctx context.Context) error {
 		return err
 	}
 
-	containers, err := c.ContainerList(ctx, types.ContainerListOptions{})
+	containers, err := c.ContainerList(ctx, types.ContainerListOptions{
+		Quiet: true,
+	})
 	if err != nil {
 		return err
 	}
