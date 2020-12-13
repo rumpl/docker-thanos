@@ -63,12 +63,14 @@ func run(ctx context.Context) error {
 	if len(s) == 0 {
 		return nil
 	}
-	eg, _ := errgroup.WithContext(ctx)
+
+	eg, ctx := errgroup.WithContext(ctx)
 
 	p := mpb.New(mpb.WithWidth(len(s) * 2))
 	bar := p.AddBar(int64(len(s)*2),
 		mpb.BarStyle("[💀💀🐳]<+"),
 	)
+
 	for _, container := range s {
 		container := container
 		eg.Go(func() error {
